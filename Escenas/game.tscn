@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=4 uid="uid://eedbdrullusa"]
+[gd_scene load_steps=15 format=4 uid="uid://eedbdrullusa"]
 
 [ext_resource type="PackedScene" uid="uid://bmtavcds0hny8" path="res://Escenas/jugador.tscn" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://dudj84txc6dl4" path="res://scripts/jugador.gd" id="2_yqjtg"]
 [ext_resource type="Texture2D" uid="uid://2fa4tdakof1e" path="res://sprites/ground.png" id="3_3418m"]
+[ext_resource type="PackedScene" uid="uid://blw53x4sh4ug6" path="res://Escenas/nube.tscn" id="4_5g6uq"]
+[ext_resource type="PackedScene" uid="uid://cf5mmeeakmtg8" path="res://Escenas/manzana.tscn" id="5_o5eqp"]
+[ext_resource type="Script" uid="uid://hm013m8lyrdp" path="res://scripts/progreso.gd" id="6_ijxpu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5g6uq"]
 texture = ExtResource("3_3418m")
@@ -62,6 +65,82 @@ texture = ExtResource("3_3418m")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_5g6uq")
 
+[sub_resource type="Animation" id="Animation_ijxpu"]
+resource_name = "mover"
+length = 3.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.52, 2.48, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-243, 53), Vector2(-243, 53), Vector2(-243, -192), Vector2(-243, -192)]
+}
+
+[sub_resource type="Animation" id="Animation_dllou"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-243, 53)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l8xc3"]
+_data = {
+&"RESET": SubResource("Animation_dllou"),
+&"mover": SubResource("Animation_ijxpu")
+}
+
+[sub_resource type="Animation" id="Animation_5g6uq"]
+resource_name = "mover"
+length = 3.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.49, 2.51, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(460, 50), Vector2(460, 50), Vector2(800, 50), Vector2(800, 50)]
+}
+
+[sub_resource type="Animation" id="Animation_o5eqp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(460, 50)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ijxpu"]
+_data = {
+&"RESET": SubResource("Animation_o5eqp"),
+&"mover": SubResource("Animation_5g6uq")
+}
+
 [node name="Nodo2D" type="Node2D"]
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_uwrxv")]
@@ -70,8 +149,74 @@ script = ExtResource("2_yqjtg")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
 position = Vector2(-2, -5)
-zoom = Vector2(5, 5)
+zoom = Vector2(3, 3)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAACAAkAAAAAAAAAAAADAAkAAAAAAAAAAAAEAAkAAAAAAAAAAAAFAAkAAAAAAAAAAAAGAAkAAAAAAAAAAAAHAAkAAAAAAAAAAAAIAAkAAAAAAAAAAAAJAAkAAAAAAAAAAAAKAAkAAAAAAAAAAAALAAkAAAAAAAAAAAAMAAkAAAAAAAAAAAANAAkAAAAAAAAAAAAOAAkAAAAAAAAAAAAPAAkAAAAAAAAAAAAQAAkAAAAAAAAAAAARAAkAAAAAAAAAAAASAAkAAAAAAAAAAAACAAoAAAAAAAEAAAACAAsAAAAAAAEAAAACAAwAAAAAAAEAAAACAA0AAAAAAAEAAAADAAoAAAAAAAEAAAADAAsAAAAAAAEAAAADAAwAAAAAAAEAAAADAA0AAAAAAAEAAAAEAAoAAAAAAAEAAAAEAAsAAAAAAAEAAAAEAAwAAAAAAAEAAAAEAA0AAAAAAAEAAAAFAAoAAAAAAAEAAAAFAAsAAAAAAAEAAAAFAAwAAAAAAAEAAAAFAA0AAAAAAAEAAAAGAAoAAAAAAAEAAAAGAAsAAAAAAAEAAAAGAAwAAAAAAAEAAAAGAA0AAAAAAAEAAAAHAAoAAAAAAAEAAAAHAAsAAAAAAAEAAAAHAAwAAAAAAAEAAAAHAA0AAAAAAAEAAAAIAAoAAAAAAAEAAAAIAAsAAAAAAAEAAAAIAAwAAAAAAAEAAAAIAA0AAAAAAAEAAAAJAAoAAAAAAAEAAAAJAAsAAAAAAAEAAAAJAAwAAAAAAAEAAAAJAA0AAAAAAAEAAAAKAAoAAAAAAAEAAAAKAAsAAAAAAAEAAAAKAAwAAAAAAAEAAAAKAA0AAAAAAAEAAAALAAoAAAAAAAEAAAALAAsAAAAAAAEAAAALAAwAAAAAAAEAAAALAA0AAAAAAAEAAAAMAAoAAAAAAAEAAAAMAAsAAAAAAAEAAAAMAAwAAAAAAAEAAAAMAA0AAAAAAAEAAAANAAoAAAAAAAEAAAANAAsAAAAAAAEAAAANAAwAAAAAAAEAAAANAA0AAAAAAAEAAAAOAAoAAAAAAAEAAAAOAAsAAAAAAAEAAAAOAAwAAAAAAAEAAAAOAA0AAAAAAAEAAAAPAAoAAAAAAAEAAAAPAAsAAAAAAAEAAAAPAAwAAAAAAAEAAAAPAA0AAAAAAAEAAAAQAAoAAAAAAAEAAAAQAAsAAAAAAAEAAAAQAAwAAAAAAAEAAAAQAA0AAAAAAAEAAAARAAoAAAAAAAEAAAARAAsAAAAAAAEAAAARAAwAAAAAAAEAAAARAA0AAAAAAAEAAAASAAoAAAAAAAEAAAASAAsAAAAAAAEAAAASAAwAAAAAAAEAAAASAA0AAAAAAAEAAAATAAkAAAAAAAAAAAAUAAkAAAAAAAAAAAAVAAkAAAAAAAAAAAAWAAkAAAAAAAAAAAAXAAkAAAAAAAAAAAAYAAkAAAAAAAAAAAAZAAkAAAAAAAAAAAAaAAkAAAAAAAAAAAAbAAkAAAAAAAAAAAD3/wkAAAAAAAAAAAD4/wkAAAAAAAAAAAD5/wkAAAAAAAAAAAD6/wkAAAAAAAAAAAD7/wkAAAAAAAAAAAD8/wkAAAAAAAAAAAD9/wkAAAAAAAAAAAD+/wkAAAAAAAAAAAD//wkAAAAAAAAAAAAAAAkAAAAAAAAAAAABAAkAAAAAAAAAAAD3/woAAAAAAAEAAAD3/wsAAAAAAAEAAAD3/wwAAAAAAAEAAAD3/w0AAAAAAAEAAAD4/woAAAAAAAEAAAD4/wsAAAAAAAEAAAD4/wwAAAAAAAEAAAD4/w0AAAAAAAEAAAD5/woAAAAAAAEAAAD5/wsAAAAAAAEAAAD5/wwAAAAAAAEAAAD5/w0AAAAAAAEAAAD6/woAAAAAAAEAAAD6/wsAAAAAAAEAAAD6/wwAAAAAAAEAAAD6/w0AAAAAAAEAAAD7/woAAAAAAAEAAAD7/wsAAAAAAAEAAAD7/wwAAAAAAAEAAAD7/w0AAAAAAAEAAAD8/woAAAAAAAEAAAD8/wsAAAAAAAEAAAD8/wwAAAAAAAEAAAD8/w0AAAAAAAEAAAD9/woAAAAAAAEAAAD9/wsAAAAAAAEAAAD9/wwAAAAAAAEAAAD9/w0AAAAAAAEAAAD+/woAAAAAAAEAAAD+/wsAAAAAAAEAAAD+/wwAAAAAAAEAAAD+/w0AAAAAAAEAAAD//woAAAAAAAEAAAD//wsAAAAAAAEAAAD//wwAAAAAAAEAAAD//w0AAAAAAAEAAAAAAAoAAAAAAAEAAAAAAAsAAAAAAAEAAAAAAAwAAAAAAAEAAAAAAA0AAAAAAAEAAAABAAoAAAAAAAEAAAABAAsAAAAAAAEAAAABAAwAAAAAAAEAAAABAA0AAAAAAAEAAAATAAoAAAAAAAEAAAATAAsAAAAAAAEAAAATAAwAAAAAAAEAAAATAA0AAAAAAAEAAAAUAAoAAAAAAAEAAAAUAAsAAAAAAAEAAAAUAAwAAAAAAAEAAAAUAA0AAAAAAAEAAAAVAAoAAAAAAAEAAAAVAAsAAAAAAAEAAAAVAAwAAAAAAAEAAAAVAA0AAAAAAAEAAAAWAAoAAAAAAAEAAAAWAAsAAAAAAAEAAAAWAAwAAAAAAAEAAAAWAA0AAAAAAAEAAAAXAAoAAAAAAAEAAAAXAAsAAAAAAAEAAAAXAAwAAAAAAAEAAAAXAA0AAAAAAAEAAAAYAAoAAAAAAAEAAAAYAAsAAAAAAAEAAAAYAAwAAAAAAAEAAAAYAA0AAAAAAAEAAAAZAAoAAAAAAAEAAAAZAAsAAAAAAAEAAAAZAAwAAAAAAAEAAAAZAA0AAAAAAAEAAAAaAAoAAAAAAAEAAAAaAAsAAAAAAAEAAAAaAAwAAAAAAAEAAAAaAA0AAAAAAAEAAAAbAAoAAAAAAAEAAAAbAAsAAAAAAAEAAAAbAAwAAAAAAAEAAAAbAA0AAAAAAAEAAAA=")
+tile_map_data = PackedByteArray("AAACAAkAAAAAAAAAAAADAAkAAAAAAAAAAAAEAAkAAAAAAAAAAAAFAAkAAAAAAAAAAAAGAAkAAAAAAAAAAAAHAAkAAAAAAAAAAAAIAAkAAAAAAAAAAAAJAAkAAAAAAAAAAAAKAAkAAAAAAAAAAAALAAkAAAAAAAAAAAAMAAkAAAAAAAAAAAANAAkAAAAAAAAAAAAOAAkAAAAAAAAAAAAPAAkAAAAAAAAAAAAQAAkAAAAAAAAAAAARAAkAAAACAAEAAAACAAoAAAAAAAEAAAACAAsAAAAAAAEAAAACAAwAAAAAAAEAAAACAA0AAAAEAAQAAAADAAoAAAAAAAEAAAADAAsAAAAAAAEAAAADAAwAAAAAAAEAAAADAA0AAAAEAAQAAAAEAAoAAAAAAAEAAAAEAAsAAAAAAAEAAAAEAAwAAAAAAAEAAAAEAA0AAAAEAAQAAAAFAAoAAAAAAAEAAAAFAAsAAAAAAAEAAAAFAAwAAAAAAAEAAAAFAA0AAAAEAAQAAAAGAAoAAAAAAAEAAAAGAAsAAAAAAAEAAAAGAAwAAAAAAAEAAAAGAA0AAAAEAAQAAAAHAAoAAAAAAAEAAAAHAAsAAAAAAAEAAAAHAAwAAAAAAAEAAAAHAA0AAAAEAAQAAAAIAAoAAAAAAAEAAAAIAAsAAAAAAAEAAAAIAAwAAAAAAAEAAAAIAA0AAAAEAAQAAAAJAAoAAAAAAAEAAAAJAAsAAAAAAAEAAAAJAAwAAAAAAAEAAAAJAA0AAAAEAAQAAAAKAAoAAAAAAAEAAAAKAAsAAAAAAAEAAAAKAAwAAAAAAAEAAAAKAA0AAAAEAAQAAAALAAoAAAAAAAEAAAALAAsAAAAAAAEAAAALAAwAAAAAAAEAAAALAA0AAAAEAAQAAAAMAAoAAAAAAAEAAAAMAAsAAAAAAAEAAAAMAAwAAAAAAAEAAAAMAA0AAAAEAAQAAAANAAoAAAAAAAEAAAANAAsAAAAAAAEAAAANAAwAAAAAAAEAAAANAA0AAAAEAAQAAAAOAAoAAAAAAAEAAAAOAAsAAAAAAAEAAAAOAAwAAAAAAAEAAAAOAA0AAAAEAAQAAAAPAAoAAAAAAAEAAAAPAAsAAAAAAAEAAAAPAAwAAAAAAAEAAAAPAA0AAAAEAAQAAAAQAAoAAAAAAAEAAAAQAAsAAAAAAAEAAAAQAAwAAAAAAAEAAAAQAA0AAAAEAAQAAAARAAoAAAABAAEAAAARAAsAAAABAAEAAAARAAwAAAABAAEAAAARAA0AAAADAAQAAAD9/wkAAAACAAAAAAD+/wkAAAAAAAAAAAD//wkAAAAAAAAAAAAAAAkAAAAAAAAAAAABAAkAAAAAAAAAAAD9/woAAAABAAAAAAD9/wsAAAABAAAAAAD9/wwAAAABAAAAAAD9/w0AAAAFAAQAAAD+/woAAAAAAAEAAAD+/wsAAAAAAAEAAAD+/wwAAAAAAAEAAAD+/w0AAAAEAAQAAAD//woAAAAAAAEAAAD//wsAAAAAAAEAAAD//wwAAAAAAAEAAAD//w0AAAAEAAQAAAAAAAoAAAAAAAEAAAAAAAsAAAAAAAEAAAAAAAwAAAAAAAEAAAAAAA0AAAAEAAQAAAABAAoAAAAAAAEAAAABAAsAAAAAAAEAAAABAAwAAAAAAAEAAAABAA0AAAAEAAQAAAAPAAgAAAADAAMAAAAPAAcAAAAEAAIAAAAPAAYAAAAEAAEAAAAPAAUAAAADAAEAAAAIAAgAAAADAAMAAAAIAAcAAAADAAIAAAAIAAYAAAADAAIAAAAIAAUAAAADAAIAAAAIAAQAAAADAAEAAAALAAgAAAAAAAIAAAD+/wgAAAADAAMAAAD+/wcAAAAEAAIAAAD+/wYAAAAEAAMAAAD+/wUAAAAEAAMAAAD+/wQAAAAEAAMAAAD+/wMAAAADAAEAAAACAAgAAAABAAIAAAABAAgAAAAAAAMAAAD//wgAAAABAAMAAAD9/wgAAAABAAMAAAAJAAgAAAABAAMAAAAQAAgAAAAAAAMAAAA=")
 tile_set = SubResource("TileSet_o5eqp")
+
+[node name="nubes" type="Node2D" parent="."]
+
+[node name="nube" parent="nubes" instance=ExtResource("4_5g6uq")]
+position = Vector2(-243, 53)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="nubes/nube"]
+libraries = {
+&"": SubResource("AnimationLibrary_l8xc3")
+}
+autoplay = "mover"
+
+[node name="nube2" parent="nubes" instance=ExtResource("4_5g6uq")]
+position = Vector2(399, 84)
+
+[node name="nube3" parent="nubes" instance=ExtResource("4_5g6uq")]
+position = Vector2(327, 118)
+
+[node name="nube4" parent="nubes" instance=ExtResource("4_5g6uq")]
+position = Vector2(460, 50)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="nubes/nube4"]
+libraries = {
+&"": SubResource("AnimationLibrary_ijxpu")
+}
+autoplay = "mover"
+
+[node name="nube5" parent="nubes" instance=ExtResource("4_5g6uq")]
+position = Vector2(-109, 129)
+
+[node name="nube6" parent="nubes" instance=ExtResource("4_5g6uq")]
+position = Vector2(130, 42)
+
+[node name="nube7" parent="nubes" instance=ExtResource("4_5g6uq")]
+position = Vector2(-178, 84)
+
+[node name="manzanas" type="Node2D" parent="."]
+
+[node name="manzana" parent="manzanas" instance=ExtResource("5_o5eqp")]
+position = Vector2(462, 34)
+
+[node name="manzana5" parent="manzanas" instance=ExtResource("5_o5eqp")]
+position = Vector2(668, 34)
+
+[node name="manzana6" parent="manzanas" instance=ExtResource("5_o5eqp")]
+position = Vector2(-119, 115)
+
+[node name="manzana2" parent="manzanas" instance=ExtResource("5_o5eqp")]
+position = Vector2(62, 132)
+
+[node name="manzana3" parent="manzanas" instance=ExtResource("5_o5eqp")]
+position = Vector2(-277, 31)
+
+[node name="manzana4" parent="manzanas" instance=ExtResource("5_o5eqp")]
+position = Vector2(124, 26)
+
+[node name="progreso" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("6_ijxpu")
+
+[node name="Label" type="Label" parent="progreso"]
+offset_left = 7.0
+offset_top = 54.0
+offset_right = 166.0
+offset_bottom = 77.0
+text = "Pedro ha comido 0 manzanas"

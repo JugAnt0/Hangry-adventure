@@ -136,6 +136,7 @@ animations = [{
 }]
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
+z_index = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 2)
@@ -143,5 +144,5 @@ shape = SubResource("RectangleShape2D_83bx5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_56xm4")
-animation = &"saltar"
+animation = &"correr"
 autoplay = "idola"
