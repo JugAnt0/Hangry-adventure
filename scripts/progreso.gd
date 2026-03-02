@@ -5,5 +5,7 @@ var puntos = 0
 
 func sumar_puntos():
 	puntos += 1
-	label.text = "Pedro ha comido " + str(puntos) + " manzanas"
+	label.text = "Comi " + str(puntos) + " manzanas, pero sigo con hambre"
+	if puntos == 50:
+		label.text = "UFF, estoy lleno. Gracias por ayudarme a comer 50 manzanas!"
 	

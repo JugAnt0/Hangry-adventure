@@ -1,10 +1,13 @@
 extends CharacterBody2D
 @onready var jugador: AnimatedSprite2D = $AnimatedSprite2D
+@onready var camera_2d: Camera2D = $Camera2D
+@onready var death_timer: Timer = $"../death_timer"
 
 
 const SPEED = 150.0
 const JUMP_VELOCITY = -300.0
 
+@onready var panda: CharacterBody2D = $"."
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -30,3 +33,16 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		jugador.play("idola")
 	move_and_slide()
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body == panda:
+		Engine.time_scale = 0.5
+		
+		death_timer.start()
+		
+
+
+func _on_death_timer_timeout() -> void:
+	Engine.time_scale = 1
+	get_tree().reload_current_scene()
