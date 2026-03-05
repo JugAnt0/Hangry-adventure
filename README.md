@@ -1,21 +1,41 @@
-﻿# A Hangry Adventure
+# A Hangry Adventure
 
-## A Hangry Adventure is a platformer, pixel art, 2D game made in Godot that has very basic mechanics:
+**A Hangry Adventure** is a 2D pixel-art platformer built with the Godot game engine.
 
-Moving (with the arrow or ad keys), jumping ( with the space bar or the w key), eating apples (by touching them), and falling (by, well, falling).
+The game features simple core mechanics:
+- **Movement:** Arrow keys or A/D
+- **Jumping:** Space bar or W
+- **Eating apples:** Collect apples by touching them
+- **Falling:** When you fall off the map, the level resets
 
-## In this repo there are 3 main sections:
+## Project Structure
+
+The repo is organized into three main sections:
 
 ### Scenes
-
-All of the key parts of the game: Platforms, Player, Apples, and the Level
+Contains the main game scenes, including:
+- Platforms
+- Player
+- Apples
+- Level layout
 
 ### Scripts
-
-Where all the code for the game is stored (Like moving, apple counter, falling, etc)
+Contains the GDScript code that powers the game mechanics:
+- Player movement
+- Jumping
+- Apple collection
+- Score tracking
+- Gravity and falling
 
 ### Sprites
+All pixel art assets used in the game.  
+Sprites were created by me using **Aseprite**.
 
-Where all the pixel art drawings (made by me in aseptrite) are located
+## Built With
+- **Godot Engine**
+- **GDScript**
+- **Aseprite**
 
+## How to Run:
 
+ Go to itc.io with this link and click "play" ->>>> https://jugant0.itch.io/a-hangry-adventure
